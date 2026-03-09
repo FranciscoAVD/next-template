@@ -3,8 +3,9 @@ import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
+  const path = request.nextUrl.pathname;
 
-  if (!sessionCookie) {
+  if (!sessionCookie && path === "/dashboard") {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 

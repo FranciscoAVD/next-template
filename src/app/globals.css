@@ -5,15 +5,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --text-header-1: var(--header-1);
+  --text-header-2: var(--header-2);
+  --text-header-3: var(--header-3);
+  --text-header-4: var(--header-4);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary-foreground: var(
+    --sidebar-primary-foreground
+  );
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
@@ -48,6 +54,19 @@
 }
 
 :root {
+  --minor-second: 1.067;
+  --major-second: 1.125;
+  --minor-third: 1.2;
+  --major-third: 1.25;
+  --perfect-fourth: 1.333;
+  --aug-fourth: 1.414;
+  --perfect-fifth: 1.5;
+  --golden-ratio: 1.618;
+  --text-scale: var(--perfect-fourth);
+  --header-4: calc(var(--text-scale) * 1rem);
+  --header-3: calc(var(--text-scale) * var(--header-4));
+  --header-2: calc(var(--text-scale) * var(--header-3));
+  --header-1: calc(var(--text-scale) * var(--header-2));
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -89,7 +108,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0.00 0);
+  --primary: oklch(0.87 0 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -124,6 +143,18 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply font-mono;
+  }
+  h1 {
+    @apply text-header-1 tracking-[-2px] leading-[100%] font-semibold capitalize;
+  }
+  h2 {
+    @apply text-header-2 tracking-[-2px] leading-[100%] font-semibold capitalize;
+  }
+  h3 {
+    @apply text-header-3 tracking-[-1px] leading-[130%] font-semibold capitalize;
+  }
+  h4 {
+    @apply text-header-4 tracking-[-1px] leading-[130%] font-semibold capitalize;
   }
 }

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { LoadingSpinner } from "@c/ui/loading-spinner";
 import { z } from "zod";
+import Link from "next/link";
 
 const signUpSchema = z.object({
   name: z
@@ -80,6 +81,7 @@ export function SignUpForm({
           id="signup-name"
           name="name"
           type="text"
+          placeholder="John Doe"
         />
         {formErrors?.name && (
           <FormError>{formErrors.name.errors[0]}</FormError>
@@ -90,6 +92,7 @@ export function SignUpForm({
         <Input
           id="signup-email"
           name="email"
+          placeholder="john.doe@example.com"
         />
         {formErrors?.email && (
           <FormError>{formErrors.email.errors[0]}</FormError>
@@ -106,6 +109,15 @@ export function SignUpForm({
           <FormError>{formErrors.password.errors[0]}</FormError>
         )}
       </div>
+      <p className="text-sm">
+        Already have an account?{" "}
+        <Link
+          href="/sign-in"
+          className="underline text-blue-500"
+        >
+          Sign in
+        </Link>
+      </p>
       <Button type="submit">
         {isLoading ? <LoadingSpinner /> : "Sign up"}
       </Button>
@@ -166,6 +178,7 @@ export function SignInForm({
         <Input
           id="signin-email"
           name="email"
+          placeholder="john.doe@example.com"
         />
         {formErrors?.email && (
           <FormError>{formErrors.email.errors[0]}</FormError>
@@ -182,6 +195,15 @@ export function SignInForm({
           <FormError>{formErrors.password.errors[0]}</FormError>
         )}
       </div>
+      <p className="text-sm">
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/"
+          className="underline text-blue-500"
+        >
+          Sign up
+        </Link>
+      </p>
       <Button type="submit">
         {isLoading ? <LoadingSpinner /> : "Sign in"}
       </Button>
