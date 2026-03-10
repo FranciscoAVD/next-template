@@ -1,16 +1,18 @@
 "use client";
+// Framework
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+// Utils
 import { authClient } from "@/lib/auth-client";
-
+import { z } from "zod";
+import { cn } from "@/lib/utils";
+// UI
+import Link from "next/link";
 import { Label } from "@c/ui/label";
 import { Button } from "@c/ui/button";
 import { Input } from "@c/ui/input";
-import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 import { LoadingSpinner } from "@c/ui/loading-spinner";
-import { z } from "zod";
-import Link from "next/link";
+import { toast } from "sonner";
 
 const signUpSchema = z.object({
   name: z

@@ -1,11 +1,13 @@
 "use client";
-
-import Link from "next/link";
+// Framework
 import { usePathname } from "next/navigation";
-import { Container } from "@c/container";
-import { AuthLoading, SignedIn, SignedOut } from "@c/auth/auth";
+// Utils
 import { cn } from "@/lib/utils";
+//Components
+import Link from "next/link";
+import { Container } from "@c/container";
 import { Button } from "./ui/button";
+import { AuthLoading, SignedIn, SignedOut } from "@c/auth/auth";
 
 export function Header({
   className,
