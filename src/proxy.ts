@@ -1,11 +1,15 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
+import { isPathInRoutes } from "@/lib/utils";
+
+const protectedRoutes = ["/dashboard/*"];
 
 export async function proxy(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const path = request.nextUrl.pathname;
+  const isProtected = isPathInRoutes(path, protectedRoutes);
 
-  if (!sessionCookie && path === "/dashboard") {
+  if (!sessionCookie && isProtected) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
@@ -13,5 +17,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"],
+  matcher: ["/dashboard/*"],
 };
