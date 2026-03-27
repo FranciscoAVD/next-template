@@ -7,5 +7,11 @@ export default async function Dashboard() {
     headers: await headers(),
   });
   if (!session) redirect("/sign-in");
-  return <main>Dashboard page.</main>;
+  return (
+    <main className="grid place-content-center pt-18">
+      <h1 className="inline-flex items-center gap-2">
+        <span className="font-light">dashboard</span> page
+      </h1>
+    </main>
+  );
 }

@@ -19,7 +19,7 @@ export function Header({
       {...props}
       className={cn(`sticky top-0 bg-background shadow ${className}`)}
     >
-      <Container className="flex items-center justify-between py-4">
+      <Container className="flex items-center justify-between h-16">
         <Link
           href="/"
           className="font-light"
@@ -45,12 +45,10 @@ export function Header({
               variant="secondary"
               asChild
             >
-              <Link
-                href="/sign-in"
-                className={cn(path === "/sign-in" && "text-blue-500")}
-              >
-                Sign in
-              </Link>
+              <Link href="/sign-in">Sign in</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/sign-up">Sign up</Link>
             </Button>
           </SignedOut>
         </nav>
