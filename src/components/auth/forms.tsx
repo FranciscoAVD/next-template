@@ -200,7 +200,7 @@ export function SignInForm({
       <p className="text-sm">
         Don&apos;t have an account?{" "}
         <Link
-          href="/"
+          href="/sign-up"
           className="underline text-blue-500"
         >
           Sign up
