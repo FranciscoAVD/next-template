@@ -7,13 +7,13 @@ basic authentication, middleware, and ORM setup.
 - **Next.js** - Framework
 - **Tailwind CSS** - Style System
 - **Shadcn UI** - UI/UX System
-- **Better Auth** - Auth system
+- **Better Auth** - Auth System
 - **Tanstack Query** - Data fetching
 - **Drizzle ORM** - ORM
 - **PostgreSQL** - Database
 - **Zod** - Data validation
 - **T3 Env** - Environment variable management
-
+- **Resend** - Email provider
 
 ## Getting Started
 1. Create a .env file (note: T3 Env will not work 
