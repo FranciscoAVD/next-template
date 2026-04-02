@@ -12,6 +12,9 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string(),
     RESEND_API_KEY: z.string(),
+    ADMIN_EMAIL: z.email(),
+    ADMIN_PASSWORD: z.string(),
+    ADMIN_NAME: z.string(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -23,6 +26,9 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+    ADMIN_NAME: process.env.ADMIN_NAME,
   },
   emptyStringAsUndefined: true,
 });
