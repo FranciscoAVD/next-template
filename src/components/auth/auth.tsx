@@ -1,27 +1,34 @@
 "use client";
-
-import { authClient } from "@/lib/auth-client";
+import { useAuthContext } from "@c/auth/auth-provider";
 
 interface AuthProps {
   children?: React.ReactNode;
 }
 
 export function SignedIn({ children }: AuthProps) {
-  const { data, isPending } = authClient.useSession();
+  const { data, isPending } = useAuthContext();
   if (isPending || !data) return null;
-  return <>{children}</>;
+  return children;
 }
 
 export function SignedOut({ children }: AuthProps) {
-  const { data, isPending } = authClient.useSession();
+  const { data, isPending } = useAuthContext();
   if (isPending || data) return null;
-  return <>{children}</>;
+  return children;
 }
 
-export function AuthLoading({ children }: AuthProps) {
-  const { isPending } = authClient.useSession();
-  if (!isPending) return null;
-  return <>{children ?? <Fallback />}</>;
+export function Admin({ children }: AuthProps) {
+  const { data, isPending } = useAuthContext();
+  if (data?.user.role !== "admin" || isPending) return null;
+  return children;
+}
+
+export function AuthLoading({
+  children,
+  fallback,
+}: AuthProps & { fallback?: React.ReactNode }) {
+  const { data, isPending } = useAuthContext();
+  return isPending ? (fallback ?? <Fallback />) : children;
 }
 
 function Fallback() {
