@@ -34,9 +34,11 @@ export default function RootLayout({
       <body
         className={`${geistMono.variable} ${inter.variable} antialiased`}
       >
-        <Header />
-        <Providers>{children}</Providers>
-        <Toaster />
+        <Providers>
+          <Header />
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
