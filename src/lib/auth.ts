@@ -22,7 +22,8 @@ export const auth = betterAuth({
         from: "Acme <onboarding@resend.dev>",
         to: [user.email],
         subject: "Email verification",
-        react: ResetPasswordTemplate({ name: user.name, url }),
+        text: `Use this link to reset your password ${url}.`,
+        // react: ResetPasswordTemplate({ name: user.name, url }),
       });
     },
   },
@@ -32,7 +33,8 @@ export const auth = betterAuth({
         from: "Acme <onboarding@resend.dev>",
         to: [user.email],
         subject: "Email verification",
-        react: SignUpTemplate({ name: user.name, url }),
+        text: `Use this link to verify your email ${url}.`,
+        // react: SignUpTemplate({ name: user.name, url }),
       });
     },
   },
