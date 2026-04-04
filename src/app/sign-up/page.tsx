@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { SignUpForm } from "@c/auth/forms";
-import vercel from "@p/vercel.svg";
+import { SignUpForm } from "@f/auth/components/forms";
 
 export default function SignUp() {
   return (

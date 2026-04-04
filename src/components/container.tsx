@@ -8,7 +8,7 @@ export function Container({
   return (
     <div
       {...props}
-      className={cn(`container mx-auto px-4 sm:px-0 ${className}`)}
+      className={cn(`container mx-auto px-4 md:px-0 ${className}`)}
     >
       {children}
     </div>

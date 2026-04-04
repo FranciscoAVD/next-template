@@ -4,7 +4,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { AuthProvider } from "@c/auth/auth-provider";
+import { AuthProvider } from "@f/auth/components/auth-provider";
 
 function makeQueryClient() {
   return new QueryClient({

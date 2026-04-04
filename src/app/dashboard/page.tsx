@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@f/auth/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -8,10 +8,14 @@ export default async function Dashboard() {
   });
   if (!session) redirect("/sign-in");
   return (
-    <main className="grid place-content-center pt-18">
-      <h1 className="inline-flex items-center gap-2">
+    <main className="grid place-content-center pt-18 text-center">
+      <h1 className="mb-4">
         <span className="font-light">dashboard</span> page
       </h1>
+      <p>
+        Welcome, {session.user.name} &#40;
+        {session.user.role ?? "user"}&#41;!
+      </p>
     </main>
   );
 }

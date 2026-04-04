@@ -5,12 +5,19 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Container } from "@c/container";
 import { Button } from "@c/ui/button";
-import { AuthLoading, SignedIn, SignedOut } from "@c/auth/auth";
+import {
+  AuthLoading,
+  SignedIn,
+  SignedOut,
+} from "@f/auth/components/auth";
+import { UserButton } from "@f/auth/components/user-btn";
+import { usePathname } from "next/navigation";
 
 export function Header({
   className,
   ...props
 }: React.ComponentProps<"header">) {
+  const path = usePathname();
   return (
     <header
       {...props}
@@ -26,9 +33,11 @@ export function Header({
         <nav className="space-x-2">
           <AuthLoading>
             <SignedIn>
-              <Button asChild>
+              {path.includes("/dashboard") ? (
+                <UserButton />
+              ) : (
                 <Link href="/dashboard">Dashboard</Link>
-              </Button>
+              )}
             </SignedIn>
             <SignedOut>
               <Button
