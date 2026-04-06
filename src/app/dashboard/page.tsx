@@ -13,8 +13,7 @@ export default async function Dashboard() {
         <span className="font-light">dashboard</span> page
       </h1>
       <p>
-        Welcome, {session.user.name} &#40;
-        {session.user.role ?? "user"}&#41;!
+        Welcome, <strong>{session.user.name}</strong>!
       </p>
     </main>
   );
