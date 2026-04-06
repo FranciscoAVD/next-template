@@ -9,8 +9,8 @@
     "lint": "eslint",
     "db:push": "bunx drizzle-kit push",
     "db:studio": "bunx drizzle-kit studio",
-    "feat": "bun run gen-feat.ts",
-    "seed": "bun run src/db/seed.ts"
+    "db:seed": "bun run src/db/seed.ts",
+    "feat": "bun run gen-feat.ts"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.13.10",
