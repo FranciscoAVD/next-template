@@ -1,7 +1,3 @@
-import Image from "next/image";
-import { SignUpForm } from "@c/auth/forms";
-import vercel from "@p/vercel.svg";
-
 export default function Home() {
   return (
     <main className="grid place-content-center pt-18">
