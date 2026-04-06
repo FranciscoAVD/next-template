@@ -376,7 +376,7 @@ export function UpdatePasswordForm() {
     else toast.success("Password updated.");
   }
   return (
-    <Card className={cn(!data?.user.emailVerified && "pb-0")}>
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 capitalize">
           <Lock className="size-4" />
@@ -403,7 +403,7 @@ export function UpdatePasswordForm() {
               type="password"
               required
             />
-            <div className="my-2 bg-muted-foreground h-0.5" />
+            <div className="my-4 bg-muted h-0.5" />
             <Label htmlFor="update-password-new">New password</Label>
             <Input
               id="update-password-new"
@@ -426,7 +426,7 @@ export function UpdatePasswordForm() {
               className="mt-2"
               disabled={isLoading}
             >
-              {isLoading ? <LoadingSpinner /> : "Change password"}
+              {isLoading ? <LoadingSpinner /> : "Update password"}
             </Button>
           </form>
         )}

@@ -1,4 +1,5 @@
 "use client";
+
 import { authClient } from "@f/auth/lib/auth-client";
 import { Settings, User, LogOut } from "lucide-react";
 import { Button } from "@c/ui/button";
@@ -11,7 +12,7 @@ import {
   PopoverContent,
 } from "@c/ui/popover";
 import Link from "next/link";
-import { useAuthContext } from "./auth-provider";
+import { useAuthContext } from "@f/auth/components/auth-provider";
 import { useRouter } from "next/navigation";
 
 export function UserButton() {
@@ -29,9 +30,10 @@ export function UserButton() {
       </PopoverTrigger>
       <PopoverContent align="end">
         <PopoverHeader>
-          <PopoverTitle>{data?.user.name}</PopoverTitle>
+          <PopoverTitle>{data?.user.name}{" "}{data?.user.role === "admin" && <span className="text-muted-foreground">&#40;Admin&#41;</span>}</PopoverTitle>
           <PopoverDescription>{data?.user.email}</PopoverDescription>
         </PopoverHeader>
+      <div className="flex flex-col gap-2">
         <Button
           variant="ghost"
           className="justify-normal font-normal"
@@ -52,6 +54,7 @@ export function UserButton() {
         >
           <LogOut /> Sign out
         </Button>
+      </div>
       </PopoverContent>
     </Popover>
   );
