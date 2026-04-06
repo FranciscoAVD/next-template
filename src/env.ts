@@ -12,9 +12,9 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: z.string(),
     BETTER_AUTH_URL: z.string(),
     RESEND_API_KEY: z.string(),
-    ADMIN_EMAIL: z.email().optional(),
-    ADMIN_PASSWORD: z.string().optional(),
-    ADMIN_NAME: z.string().optional(),
+    ADMIN_EMAIL: z.email().optional().default("john.doe@example.com"),
+    ADMIN_PASSWORD: z.string().optional().default("12345678"),
+    ADMIN_NAME: z.string().optional().default("John"),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,

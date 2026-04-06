@@ -1,8 +1,8 @@
 import { env } from "@/env";
-import { auth } from "@/lib/auth";
+import { auth } from "@f/auth/lib/auth";
 
 async function seed() {
-  await auth.api.createUser({
+  const res = await auth.api.createUser({
     body: {
       email: env.ADMIN_EMAIL,
       password: env.ADMIN_PASSWORD,
@@ -10,6 +10,8 @@ async function seed() {
       role: "admin",
     },
   });
+
+  console.log(`User ${res.user.name} created with role: ${res.user.role}`);
 }
 
 seed();
