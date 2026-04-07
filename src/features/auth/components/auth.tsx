@@ -17,7 +17,7 @@ export function SignedOut({ children }: AuthProps) {
   return children;
 }
 
-export function Admin({ children }: AuthProps) {
+export function IsAdmin({ children }: AuthProps) {
   const { data, isPending } = useAuthContext();
   if (data?.user.role !== "admin" || isPending) return null;
   return children;

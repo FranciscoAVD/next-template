@@ -8,7 +8,7 @@ export function LoadingSpinner({
     <div
       {...props}
       className={cn(
-        `size-6 rounded-full border-4 border-t-accent ${className}`,
+        `size-6 rounded-full border-4 border-t-accent animate-spin ${className}`,
       )}
     />
   );

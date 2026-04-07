@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { AuthProvider } from "@f/auth/components/auth-provider";
-
+import { TooltipProvider } from "@c/ui/tooltip";
 function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -38,7 +38,9 @@ export default function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <TooltipProvider>{children}</TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
