@@ -14,18 +14,20 @@ import { Button } from "@c/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import {
-  Copy,
-  Ellipse,
-  ShieldUser,
-  UnfoldVerticalIcon,
-  User,
-} from "lucide-react";
+import { Copy } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { UserWithRole } from "better-auth/plugins";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export function UserTable() {
   const [currPage, setCurrPage] = useState<number>(1);
@@ -41,7 +43,7 @@ export function UserTable() {
   });
 
   return (
-    <Card>
+    <Card className="pt-0">
       <CardContent className="p-0">
         <Table>
           <TableCaption>A list of all users.</TableCaption>
@@ -49,48 +51,23 @@ export function UserTable() {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead>Member since</TableHead>
-              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
               <TableLoading />
+            ) : isError ? (
+              <TableRow>
+                <TableCell colSpan={4}>{error.message}</TableCell>
+              </TableRow>
             ) : (
               data?.data?.users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {user.role === "admin" ? (
-                        <ShieldUser className="size-4" />
-                      ) : (
-                        <User className="size-4" />
-                      )}
-                      {user.name}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span className="w-[100px] text-ellipsis overflow-hidden">
-                        {user.email}
-                      </span>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Copy className="size-4" />
-                        </TooltipTrigger>
-                        <TooltipContent>Copy email</TooltipContent>
-                      </Tooltip>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    {user.createdAt.toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
+                <UserRow
+                  key={user.id}
+                  user={user}
+                />
               ))
             )}
           </TableBody>
@@ -102,15 +79,64 @@ export function UserTable() {
 
 function TableLoading() {
   return (
-    <>
-      <TableRow>
-        <TableCell
-          colSpan={4}
-          className="flex justify-center h-9 bg-muted"
+    <TableRow>
+      <TableCell
+        colSpan={4}
+        className="flex justify-center bg-muted"
+      >
+        <LoadingSpinner className="border-neutral-500 border-t-transparent" />
+      </TableCell>
+    </TableRow>
+  );
+}
+
+interface IUserRow extends React.ComponentProps<"tr"> {
+  user: UserWithRole;
+}
+function UserRow({ user, className, ...props }: IUserRow) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <TableRow
+          key={user.id}
+          className={className}
         >
-          <LoadingSpinner className="border-neutral-500 border-t-transparent" />
-        </TableCell>
-      </TableRow>
-    </>
+          <TableCell>{user.name}</TableCell>
+          <TableCell>
+            <div className="flex items-center gap-2">
+              <span className="w-[120px] text-ellipsis overflow-hidden">
+                {user.email}
+              </span>
+              <Tooltip>
+                <TooltipTrigger
+                  className="cursor-pointer"
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    try {
+                      await navigator.clipboard.writeText(user.email);
+                      toast("Copied to clipboard");
+                    } catch {
+                      toast.error("Failed to copy to clipboard");
+                    }
+                  }}
+                >
+                  <Copy className="size-4" />
+                </TooltipTrigger>
+                <TooltipContent>Copy email</TooltipContent>
+              </Tooltip>
+            </div>
+          </TableCell>
+          <TableCell>{user.role}</TableCell>
+          <TableCell>
+            {user.createdAt.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </TableCell>
+        </TableRow>
+      </PopoverTrigger>
+      <PopoverContent align="end"></PopoverContent>
+    </Popover>
   );
 }
