@@ -61,7 +61,7 @@ export function UserButton() {
           >
             <Link href="/dashboard/settings">
               <Settings />
-              Settings
+              Account
             </Link>
           </Button>
           <Button
