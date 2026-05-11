@@ -18,7 +18,7 @@ export default async function Admin() {
         <div>
           <Link
             href="/dashboard"
-            className="flex gap-2 items-center text-muted-foreground mb-4"
+            className="inline-flex gap-2 items-center text-muted-foreground mb-4"
           >
             <ArrowLeft className="size-4" /> Dashboard
           </Link>
