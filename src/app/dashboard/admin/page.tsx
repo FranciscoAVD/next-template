@@ -14,7 +14,7 @@ export default async function Admin() {
 
   return (
     <main className="pt-18">
-      <Container>
+      <Container className="space-y-8 max-w-2xl">
         <div>
           <Link
             href="/dashboard"
