@@ -9,6 +9,14 @@ import {
   TableCell,
   TableCaption,
 } from "@c/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Card, CardContent } from "@c/ui/card";
 import { Button } from "@c/ui/button";
 import { useQuery } from "@tanstack/react-query";
@@ -30,7 +38,6 @@ import { UserWithRole } from "better-auth/plugins";
 import { toast } from "sonner";
 import { useAuthContext } from "@/features/auth/components/auth-provider";
 import { cn } from "@/lib/utils";
-
 export function UserTable() {
   const session = useAuthContext();
   const [currPage, setCurrPage] = useState<number>(1);
@@ -173,17 +180,31 @@ function UserRow({ user, className, ...props }: IUserRow) {
             </TooltipTrigger>
             <TooltipContent>Change role</TooltipContent>
           </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="icon"
-                variant="destructive"
-              >
-                <Ban />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Ban</TooltipContent>
-          </Tooltip>
+          <Dialog>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <DialogTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="destructive"
+                  >
+                    <Ban />
+                  </Button>
+                </DialogTrigger>
+              </TooltipTrigger>
+              <TooltipContent>Ban</TooltipContent>
+            </Tooltip>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Ban User</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to ban{" "}
+                  <strong>{user.name}</strong>?
+                </DialogDescription>
+              </DialogHeader>
+              <Button variant="destructive">Ban</Button>
+            </DialogContent>
+          </Dialog>
         </div>
       </TableCell>
     </TableRow>
